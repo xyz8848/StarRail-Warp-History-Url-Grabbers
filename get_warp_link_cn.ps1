@@ -2,8 +2,6 @@
 # https://github.com/xyz8848/StarRail-Warp-History-Url-Grabbers
 # https://gitee.com/xyz8848/StarRail-Warp-History-Url-Grabbers
 
-[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
 Add-Type -AssemblyName System.Web
