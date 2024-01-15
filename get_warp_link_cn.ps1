@@ -10,7 +10,7 @@ $ProgressPreference = 'SilentlyContinue'
 
 $game_path = ""
 
-Write-Output "\u6b63\u5728\u5c1d\u8bd5\u5b9a\u4f4d\u8dc3\u8fc1URL..."
+Write-Output "Attempting to locate Warp Url!"
 
 if ($args.Length -eq 0) {
     $app_data = [Environment]::GetFolderPath('ApplicationData')
@@ -19,7 +19,8 @@ if ($args.Length -eq 0) {
     $log_path = "$locallow_path\Player.log"
 
     if (-Not [IO.File]::Exists($log_path)) {
-        Write-Output "\u627e\u4e0d\u5230\u65e5\u5fd7\u6587\u4ef6\uff01"
+        Write-Output "Failed to locate log file!"
+        Write-Output "Try using the Global client script?"
         return
     }
 
@@ -29,7 +30,8 @@ if ($args.Length -eq 0) {
         $log_path = "$locallow_path\Player-prev.log"
 
         if (-Not [IO.File]::Exists($log_path)) {
-            Write-Output "\u627e\u4e0d\u5230\u65e5\u5fd7\u6587\u4ef6\uff01"
+            Write-Output "Failed to locate log file!"
+            Write-Output "Try using the Global client script?"
             return
         }
 
@@ -37,7 +39,8 @@ if ($args.Length -eq 0) {
     }
 
     if ([string]::IsNullOrEmpty($log_lines)) {
-        Write-Output "\u627e\u4e0d\u5230\u65e5\u5fd7\u6587\u4ef6\uff01(1)"
+        Write-Output "Failed to locate game path! (1)"
+        Write-Output "Please contact support at discord.gg/srs"
         return
     }
 
@@ -56,7 +59,8 @@ if ($args.Length -eq 0) {
 }
 
 if ([string]::IsNullOrEmpty($game_path)) {
-    Write-Output "\u627e\u4e0d\u5230\u65e5\u5fd7\u6587\u4ef6\uff01(2)"
+    Write-Output "Failed to locate game path! (2)"
+    Write-Output "Please contact support at discord.gg/srs"
 }
 
 $copy_path = [IO.Path]::GetTempPath() + [Guid]::NewGuid().ToString()
@@ -108,14 +112,14 @@ for ($i = $cache_data_split.Length - 1; $i -ge 0; $i--) {
 
             $latest_url = $uri.Scheme + "://" + $uri.Host + $uri.AbsolutePath + "?" + $query.ToString()
 
-            Write-Output "\u627e\u5230\u8dc3\u8fc1\u5386\u53f2URL\uff01"
+            Write-Output "Warp History Url Found!"
             Write-Output $latest_url
             Set-Clipboard -Value $latest_url
-            Write-Output "\u8dc3\u8fc1\u5386\u53f2URL\u5df2\u4fdd\u5b58\u5230\u526a\u8d34\u677f\u3002"
+            Write-Output "Warp History Url has been saved to clipboard."
             return;
         }
     }
 }
 
-Write-Output "\u627e\u4e0d\u5230\u8dc3\u8fc1\u5386\u53f2URL\u3002"
-Write-Output "\u8bf7\u786e\u4fdd\u5728\u8fd0\u884c\u811a\u672c\u4e4b\u524d\u5728\u6e38\u620f\u5185\u6253\u5f00\u8fc7\u8dc3\u8fc1\u5386\u53f2\u8bb0\u5f55\u3002"
+Write-Output "Could not locate Warp History Url."
+Write-Output "Please make sure to open the Warp history before running the script."
