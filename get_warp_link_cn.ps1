@@ -10,7 +10,7 @@ $ProgressPreference = 'SilentlyContinue'
 
 $game_path = ""
 
-Write-Output "正在尝试定位跃迁URL..."
+Write-Output "Attempting to locate Warp Url!"
 
 if ($args.Length -eq 0) {
     $app_data = [Environment]::GetFolderPath('ApplicationData')
@@ -19,7 +19,8 @@ if ($args.Length -eq 0) {
     $log_path = "$locallow_path\Player.log"
 
     if (-Not [IO.File]::Exists($log_path)) {
-        Write-Output "找不到日志文件！"
+        Write-Output "Failed to locate log file!"
+        Write-Output "Try using the Global client script?"
         return
     }
 
@@ -29,7 +30,8 @@ if ($args.Length -eq 0) {
         $log_path = "$locallow_path\Player-prev.log"
 
         if (-Not [IO.File]::Exists($log_path)) {
-            Write-Output "找不到日志文件！"
+            Write-Output "Failed to locate log file!"
+            Write-Output "Try using the Global client script?"
             return
         }
 
@@ -37,7 +39,8 @@ if ($args.Length -eq 0) {
     }
 
     if ([string]::IsNullOrEmpty($log_lines)) {
-        Write-Output "找不到日志文件！(1)"
+        Write-Output "Failed to locate game path! (1)"
+        Write-Output "Please contact support at discord.gg/srs"
         return
     }
 
@@ -56,7 +59,8 @@ if ($args.Length -eq 0) {
 }
 
 if ([string]::IsNullOrEmpty($game_path)) {
-    Write-Output "找不到日志文件！(2)"
+    Write-Output "Failed to locate game path! (2)"
+    Write-Output "Please contact support at discord.gg/srs"
 }
 
 $copy_path = [IO.Path]::GetTempPath() + [Guid]::NewGuid().ToString()
@@ -108,14 +112,14 @@ for ($i = $cache_data_split.Length - 1; $i -ge 0; $i--) {
 
             $latest_url = $uri.Scheme + "://" + $uri.Host + $uri.AbsolutePath + "?" + $query.ToString()
 
-            Write-Output "找到跃迁历史URL！"
+            Write-Output "Warp History Url Found!"
             Write-Output $latest_url
             Set-Clipboard -Value $latest_url
-            Write-Output "跃迁历史URL已保存到剪贴板。"
+            Write-Output "Warp History Url has been saved to clipboard."
             return;
         }
     }
 }
 
-Write-Output "找不到跃迁历史URL。"
-Write-Output "请确保在运行脚本之前在游戏内打开过跃迁历史记录。"
+Write-Output "Could not locate Warp History Url."
+Write-Output "Please make sure to open the Warp history before running the script."
