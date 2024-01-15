@@ -117,5 +117,5 @@ for ($i = $cache_data_split.Length - 1; $i -ge 0; $i--) {
     }
 }
 
-Write-Output "找不到跃迁历史Url。"
+Write-Output "找不到跃迁历史URL。"
 Write-Output "请确保在运行脚本之前在游戏内打开过跃迁历史记录。"
