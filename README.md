@@ -8,5 +8,9 @@ __代码来自[Star Rail Station](https://gist.github.com/Star-Rail-Station/2512
 2. 打开Windows PowerShell。<small><font color="gray">（你可以通过Windows搜索「Windows PowerShell」找到该程序。）</font></small>
 3. 粘贴并运行下述命令：
    ```powershell
-   [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12; Invoke-Expression (New-Object Net.WebClient).DownloadString("https://gitee.com/xyz8848/StarRail-Warp-History-Url-Grabbers/raw/main/get_warp_link_cn.ps1")
+   $response = Invoke-WebRequest -Uri "https://gitee.com/xyz8848/StarRail-Warp-History-Url-Grabbers/raw/main/get_warp_link_cn.ps1"
+   $content = $response.Content
+   Set-Content -Path $env:TEMP\temp.ps1 -Value $content -Encoding UTF8
+   & chcp 65001 | Out-Null
+   Invoke-Expression -Command "& $env:TEMP\temp.ps1"
    ```

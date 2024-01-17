@@ -1,4 +1,4 @@
-# StarRail Warp History Url Grabbers
+# 《崩坏：星穹铁道》 跃迁历史记录链接获取脚本
 # https://github.com/xyz8848/StarRail-Warp-History-Url-Grabbers
 # https://gitee.com/xyz8848/StarRail-Warp-History-Url-Grabbers
 
@@ -10,7 +10,7 @@ $ProgressPreference = 'SilentlyContinue'
 
 $game_path = ""
 
-Write-Output "Attempting to locate Warp Url!"
+Write-Output "正在尝试定位跃迁URL..."
 
 if ($args.Length -eq 0) {
     $app_data = [Environment]::GetFolderPath('ApplicationData')
@@ -19,8 +19,7 @@ if ($args.Length -eq 0) {
     $log_path = "$locallow_path\Player.log"
 
     if (-Not [IO.File]::Exists($log_path)) {
-        Write-Output "Failed to locate log file!"
-        Write-Output "Try using the Global client script?"
+        Write-Output "找不到日志文件！"
         return
     }
 
@@ -30,8 +29,7 @@ if ($args.Length -eq 0) {
         $log_path = "$locallow_path\Player-prev.log"
 
         if (-Not [IO.File]::Exists($log_path)) {
-            Write-Output "Failed to locate log file!"
-            Write-Output "Try using the Global client script?"
+            Write-Output "找不到日志文件！"
             return
         }
 
@@ -39,8 +37,7 @@ if ($args.Length -eq 0) {
     }
 
     if ([string]::IsNullOrEmpty($log_lines)) {
-        Write-Output "Failed to locate game path! (1)"
-        Write-Output "Please contact support at discord.gg/srs"
+        Write-Output "找不到日志文件！(1)"
         return
     }
 
@@ -59,8 +56,7 @@ if ($args.Length -eq 0) {
 }
 
 if ([string]::IsNullOrEmpty($game_path)) {
-    Write-Output "Failed to locate game path! (2)"
-    Write-Output "Please contact support at discord.gg/srs"
+    Write-Output "找不到日志文件！(2)"
 }
 
 $copy_path = [IO.Path]::GetTempPath() + [Guid]::NewGuid().ToString()
@@ -112,14 +108,14 @@ for ($i = $cache_data_split.Length - 1; $i -ge 0; $i--) {
 
             $latest_url = $uri.Scheme + "://" + $uri.Host + $uri.AbsolutePath + "?" + $query.ToString()
 
-            Write-Output "Warp History Url Found!"
+            Write-Output "找到跃迁历史URL！"
             Write-Output $latest_url
             Set-Clipboard -Value $latest_url
-            Write-Output "Warp History Url has been saved to clipboard."
+            Write-Output "跃迁历史URL已保存到剪贴板。"
             return;
         }
     }
 }
 
-Write-Output "Could not locate Warp History Url."
-Write-Output "Please make sure to open the Warp history before running the script."
+Write-Output "找不到跃迁历史Url。"
+Write-Output "请确保在运行脚本之前在游戏内打开过跃迁历史记录。"
